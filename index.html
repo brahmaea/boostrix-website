@@ -227,7 +227,7 @@
                                 <span class="stat-value">6 000 000 руб. за запуск</span>
                             </div>
                         </div>
-                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                        <button class="case-btn" onclick="openModal()">ХОЧУ ТАК ЖЕ</button>
                     </div>
                 </div>
 
@@ -253,7 +253,7 @@
                                 <span class="stat-value">15 000 000 руб. за запуск</span>
                             </div>
                         </div>
-                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                        <button class="case-btn" onclick="openModal()">ХОЧУ ТАК ЖЕ</button>
                     </div>
                 </div>
 
@@ -279,7 +279,7 @@
                                 <span class="stat-value">10-15 000 000 руб. за запуск</span>
                             </div>
                         </div>
-                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                        <button class="case-btn" onclick="openModal()">ХОЧУ ТАК ЖЕ</button>
                     </div>
                 </div>
 
@@ -305,7 +305,7 @@
                                 <span class="stat-value">1 000 000 руб. за запуск</span>
                             </div>
                         </div>
-                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                        <button class="case-btn" onclick="openModal()">ХОЧУ ТАК ЖЕ</button>
                     </div>
                 </div>
 
@@ -331,7 +331,7 @@
                                 <span class="stat-value">20 000 000 руб. за запуск</span>
       </div>
               </div>
-                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                        <button class="case-btn" onclick="openModal()">ХОЧУ ТАК ЖЕ</button>
       </div>
     </div>
 
@@ -357,7 +357,7 @@
                                 <span class="stat-value">300 000 руб. за запуск</span>
                             </div>
                         </div>
-                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                        <button class="case-btn" onclick="openModal()">ХОЧУ ТАК ЖЕ</button>
                     </div>
                 </div>
             </div>
@@ -383,7 +383,11 @@
                     </div>
                 </div>
                 <div class="contact-form">
-                    <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/movlndej" method="POST">
+                        <input type="hidden" name="_subject" value="Новая заявка с Boostrix - Основная форма">
+                        <input type="hidden" name="_next" value="https://boostrix.ru#contact">
+                        <input type="hidden" name="_language" value="ru">
+                        
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="Ваше имя" required>
                         </div>
@@ -408,7 +412,11 @@
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Получить консультацию</h2>
-            <form id="modalForm">
+            <form id="modalForm" action="https://formspree.io/f/movlndej" method="POST">
+                <input type="hidden" name="_subject" value="Новая заявка с Boostrix - Модальная форма">
+                <input type="hidden" name="_next" value="https://boostrix.ru#contact">
+                <input type="hidden" name="_language" value="ru">
+                
                 <div class="form-group">
                     <input type="text" id="modalName" name="name" placeholder="Ваше имя" required>
                 </div>
