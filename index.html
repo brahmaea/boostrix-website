@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boostrix - Аутсорсинговый отдел продаж для онлайн-школ и инфобизнеса</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Boostrix</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#advantages">Преимущества</a></li>
+                <li><a href="#contact">Контакты</a></li>
+                    </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background">
+            <div class="neon-grid"></div>
+            <div class="floating-elements">
+                <div class="element element-1"></div>
+                <div class="element element-2"></div>
+                <div class="element element-3"></div>
+          </div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="neon-text">Аутсорсинговый отдел продаж</span>
+                        <span class="hero-subtitle">для запусков, инфопродуктов и онлайн-школ</span>
+                    </h1>
+                    <p class="hero-description">
+                        Запускаем, сопровождаем и масштабируем ваши проекты с помощью опытной команды продажников
+                    </p>
+                    <div class="hero-cta">
+                        <button class="cta-button" onclick="openModal()">
+                            <i class="fab fa-telegram"></i>
+                            Получить консультацию
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="team-photo">
+                        <img src="images/iScreen Shoter - Cursor - 250802145615.jpg" alt="Наша команда" class="team-image">
+        </div>
+      </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="5" data-suffix="+">0</div>
+                    <div class="stat-label">лет опыта</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="10" data-prefix="До ">0</div>
+                    <div class="stat-label">менеджеров</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="15" data-suffix="+">0</div>
+                    <div class="stat-label">запусков от 5млн</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="62" data-suffix="%">0</div>
+                    <div class="stat-label">в оплату</div>
+        </div>
+      </div>
+      </div>
+</section>
+  
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Услуги под ключ</h2>
+                <p class="section-subtitle">Полный цикл сопровождения ваших продаж</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>Скрипты продаж</h3>
+                    <p>Проработанные скрипты с учетом всех возражений и сценариев</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Обучающие материалы</h3>
+                    <p>Создание обучающих материалов на основе вашего продукта</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Интеграция систем</h3>
+                    <p>CRM, телефония, мессенджеры - все под ключ</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Обработка заказов</h3>
+                    <p>Звонки, обработка заявок, консультации клиентов</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Ежедневная отчетность</h3>
+                    <p>Детальная аналитика по каждому менеджеру</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Масштабирование</h3>
+                    <p>Постоянное развитие и рост продаж</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section id="advantages" class="advantages">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <p class="section-subtitle">Доказанные результаты и прозрачная работа</p>
+            </div>
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Опытная команда</h3>
+                    <p>Более 5 лет в продажах, десятки успешных проектов</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Чеки 50 - 300к</h3>
+                    <p>Работаем с чеками от 50 000 руб. - 300 000 тыс. +</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>Ежедневный контроль</h3>
+                    <p>Планерки и контроль качества работы</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <h3>Гибкая оплата</h3>
+                    <p>Процент от продаж - заинтересованы в результате</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>Прозрачная аналитика</h3>
+                    <p>Полная отчетность по всем показателям</p>
+                </div>
+                <div class="advantage-item">
+                    <div class="advantage-icon">
+                        <i class="fas fa-trending-up"></i>
+                    </div>
+                    <h3>Рост продаж 30-50%</h3>
+                    <p>Средняя конверсия 62% в оплату с заявки</p>
+      </div>
+      </div>
+        </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section class="cases">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Кейсы</h2>
+                <p class="section-subtitle">Реальные результаты наших клиентов</p>
+            </div>
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/3.jpg" alt="Дмитрий Дрожжин" class="case-photo">
+                    </div>
+                    <div class="case-content">
+                        <h3>Дмитрий Дрожжин</h3>
+                        <p class="case-handle">@drozhzhin</p>
+                        <p class="case-product">Курс по продвижению ютуб канала</p>
+                        <div class="case-stats">
+                            <div class="stat">
+                                <span class="stat-label">Количество рабочих дней:</span>
+                                <span class="stat-value">5 месяцев</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Средний чек:</span>
+                                <span class="stat-value">69 900 рублей</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Результат:</span>
+                                <span class="stat-value">6 000 000 руб. за запуск</span>
+                            </div>
+                        </div>
+                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/2025-08-02 13.52.03.jpg" alt="Артем Благо" class="case-photo">
+                    </div>
+                    <div class="case-content">
+                        <h3>Артем Благо</h3>
+                        <p class="case-handle">@artem.blago</p>
+                        <p class="case-product">Курс по выходу на маркетплейс Wildberries и менеджерство</p>
+                        <div class="case-stats">
+                            <div class="stat">
+                                <span class="stat-label">Количество рабочих дней:</span>
+                                <span class="stat-value">1 год 6 месяцев</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Средний чек:</span>
+                                <span class="stat-value">89 990 рублей</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Результат:</span>
+                                <span class="stat-value">15 000 000 руб. за запуск</span>
+                            </div>
+                        </div>
+                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/2025-08-02 13.52.08.jpg" alt="Виктор Лапин" class="case-photo">
+                    </div>
+                    <div class="case-content">
+                        <h3>Виктор Лапин</h3>
+                        <p class="case-handle">@lapingroup</p>
+                        <p class="case-product">Академия ProRealtor</p>
+                        <div class="case-stats">
+                            <div class="stat">
+                                <span class="stat-label">Количество рабочих дней:</span>
+                                <span class="stat-value">9 месяцев</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Средний чек:</span>
+                                <span class="stat-value">87 000 рублей</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Результат:</span>
+                                <span class="stat-value">10-15 000 000 руб. за запуск</span>
+                            </div>
+                        </div>
+                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/2025-08-02 13.52.20.jpg" alt="Hanna Berji" class="case-photo">
+                    </div>
+                    <div class="case-content">
+                        <h3>Hanna Berji</h3>
+                        <p class="case-handle">@Web3nity</p>
+                        <p class="case-product">Курс по нейросетям</p>
+                        <div class="case-stats">
+                            <div class="stat">
+                                <span class="stat-label">Количество рабочих дней:</span>
+                                <span class="stat-value">15 дней</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Средний чек:</span>
+                                <span class="stat-value">58 000 рублей</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Результат:</span>
+                                <span class="stat-value">1 000 000 руб. за запуск</span>
+                            </div>
+                        </div>
+                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/2025-08-02 13.52.13.jpg" alt="Лера Несмм" class="case-photo">
+                    </div>
+                    <div class="case-content">
+                        <h3>Лера Несмм</h3>
+                        <p class="case-handle">@leralvl</p>
+                        <p class="case-product">Обучение по переливу трафика с ТикТок</p>
+                        <div class="case-stats">
+                            <div class="stat">
+                                <span class="stat-label">Количество рабочих дней:</span>
+                                <span class="stat-value">2 месяца</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Средний чек:</span>
+                                <span class="stat-value">89 000 рублей</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Результат:</span>
+                                <span class="stat-value">20 000 000 руб. за запуск</span>
+      </div>
+              </div>
+                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+      </div>
+    </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/2025-08-02 13.52.16.jpg" alt="Анна Шулепова" class="case-photo">
+                    </div>
+                    <div class="case-content">
+                        <h3>Анна Шулепова</h3>
+                        <p class="case-handle">@anurka_shul</p>
+                        <p class="case-product">Курсы по шпагату</p>
+                        <div class="case-stats">
+                            <div class="stat">
+                                <span class="stat-label">Количество рабочих дней:</span>
+                                <span class="stat-value">1 месяц</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Средний чек:</span>
+                                <span class="stat-value">50 000 рублей</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Результат:</span>
+                                <span class="stat-value">300 000 руб. за запуск</span>
+                            </div>
+                        </div>
+                        <button class="case-btn">ХОЧУ ТАК ЖЕ</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </section>    
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h2>Готовы увеличить продажи?</h2>
+                    <p>Оставьте заявку и получите бесплатную консультацию</p>
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <i class="fab fa-telegram"></i>
+                            <span>@egor_digital</span>
+                        </div>
+                        <div class="contact-method">
+                            <i class="fas fa-phone"></i>
+                            <span>+7 (904) 757-67-13</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="telegram" name="telegram" placeholder="Ваш Telegram" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Расскажите о вашем проекте" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fab fa-telegram"></i>
+                            Отправить заявку
+                        </button>
+                    </form>
+                </div>
+    </div>
+    </div>
+  </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Получить консультацию</h2>
+            <form id="modalForm">
+                <div class="form-group">
+                    <input type="text" id="modalName" name="name" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="modalTelegram" name="telegram" placeholder="Ваш Telegram" required>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fab fa-telegram"></i>
+                    Отправить
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+    <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text">Boostrix</span>
+                    <p>Аутсорсинговый отдел продаж</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#home">Главная</a>
+                    <a href="#services">Услуги</a>
+                    <a href="#advantages">Преимущества</a>
+                    <a href="#contact">Контакты</a>
+                </div>
+                <div class="footer-social">
+                    <a href="https://t.me/egor_digital" target="_blank"><i class="fab fa-telegram"></i></a>
+                    <a href="https://wtsp.cc/79047576713" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://vk.com/public213660617" target="_blank"><i class="fab fa-vk"></i></a>
+                </div>
+    </div>
+    <div class="footer-bottom">
+                <p>&copy; 2024 Boostrix. Все права защищены.</p>
+            </div>
+    </div>
+  </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
