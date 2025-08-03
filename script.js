@@ -7,6 +7,7 @@ async function sendToTelegram(formData) {
     const message = ` НОВАЯ ЗАЯВКА С САЙТА BOOSTRIX!
 
 👤 Имя: ${formData.name}
+📞 Телефон: ${formData.phone}
 📱 Telegram: ${formData.telegram}
 💬 Сообщение: ${formData.message || 'Не указано'}
 📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
@@ -163,6 +164,7 @@ document.addEventListener('keydown', (e) => {
 async function handleFormSubmit(form, isModal = false) {
     const formData = {
         name: form.querySelector('[name="name"]').value,
+        phone: form.querySelector('[name="phone"]').value,
         telegram: form.querySelector('[name="telegram"]').value,
         message: form.querySelector('[name="message"]') ? form.querySelector('[name="message"]').value : 'Запрос консультации'
     };
