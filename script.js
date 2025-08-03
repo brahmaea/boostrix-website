@@ -4,7 +4,7 @@ const TELEGRAM_CHAT_ID = '475597372';
 
 // Функция отправки в Telegram
 async function sendToTelegram(formData) {
-    const message = `�� НОВАЯ ЗАЯВКА С САЙТА BOOSTRIX!
+    const message = ` НОВАЯ ЗАЯВКА С САЙТА BOOSTRIX!
 
 👤 Имя: ${formData.name}
 📱 Telegram: ${formData.telegram}
@@ -83,7 +83,7 @@ function animateCounters() {
         const target = parseInt(counter.getAttribute('data-target'));
         const prefix = counter.getAttribute('data-prefix') || '';
         const suffix = counter.getAttribute('data-suffix') || '';
-        const duration = 350; // 0.35 seconds - средняя скорость
+        const duration = 500; // 0.5 seconds - оптимальная скорость
         const increment = target / (duration / 16); // 60fps
         let current = 0;
         
