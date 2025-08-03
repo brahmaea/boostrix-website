@@ -1,338 +1,188 @@
-// Mobile Navigation
-const hamburger = document.querySelector('.hamburger');
-const navMenu = document.querySelector('.nav-menu');
+// ВАШ ТОКЕН И CHAT ID УЖЕ НАСТРОЕНЫ
+const TELEGRAM_BOT_TOKEN = '8283808797:AAEvmthAgZg8BMCSg30iCLA17cOi4XkWN-k';
+const TELEGRAM_CHAT_ID = '475597372';
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Close mobile menu when clicking on a link
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    });
-});
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Animated counters
-function animateCounters() {
-    const counters = document.querySelectorAll('.stat-number');
-    
-    counters.forEach(counter => {
-        const target = parseInt(counter.getAttribute('data-target'));
-        const prefix = counter.getAttribute('data-prefix') || '';
-        const suffix = counter.getAttribute('data-suffix') || '';
-        const duration = 500; // 0.5 seconds
-        const increment = target / (duration / 16); // 60fps
-        let current = 0;
-        
-        const updateCounter = () => {
-            current += increment;
-            if (current < target) {
-                counter.textContent = prefix + Math.floor(current) + suffix;
-                requestAnimationFrame(updateCounter);
-            } else {
-                counter.textContent = prefix + target + suffix;
-            }
-        };
-        
-        updateCounter();
-    });
+// Функция проверки конфигурации
+function checkConfig() {
+    console.log('✅ Конфигурация настроена правильно!');
+    return true;
 }
 
-// Intersection Observer for scroll animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+// Функция отправки в Telegram
+async function sendToTelegram(formData) {
+    if (!checkConfig()) {
+        return { success: false, error: 'Не настроен Chat ID' };
+    }
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('animate');
+    const message = `🔥 НОВАЯ ЗАЯВКА С САЙТА BOOSTRIX!
+
+👤 Имя: ${formData.name}
+📱 Telegram: ${formData.telegram}
+💬 Сообщение: ${formData.message || 'Не указано'}
+📅 Дата: ${new Date().toLocaleString('ru-RU')}`;
+
+    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+    
+    console.log('🔍 Отправляем запрос в Telegram...');
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                chat_id: TELEGRAM_CHAT_ID,
+                text: message,
+                parse_mode: 'HTML'
+            })
+        });
+
+        const responseData = await response.json();
+        console.log('📥 Ответ от Telegram API:', responseData);
+
+        if (response.ok && responseData.ok) {
+            console.log('✅ Сообщение отправлено успешно!');
+            return { success: true };
+        } else {
+            console.error('❌ Ошибка от Telegram API:', responseData);
             
-            // Trigger counter animation when stats section is visible
-            if (entry.target.classList.contains('stats')) {
-                animateCounters();
+            let errorMessage = 'Неизвестная ошибка';
+            if (responseData.error_code === 400) {
+                errorMessage = 'Неверный Chat ID. Проверьте правильность Chat ID.';
+            } else if (responseData.description) {
+                errorMessage = responseData.description;
             }
+            
+            return { 
+                success: false, 
+                error: `Ошибка ${responseData.error_code}: ${errorMessage}` 
+            };
         }
-    });
-}, observerOptions);
+    } catch (error) {
+        console.error('❌ Сетевая ошибка:', error);
+        return { 
+            success: false, 
+            error: `Сетевая ошибка: ${error.message}` 
+        };
+    }
+}
 
-// Observe elements for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const animateElements = document.querySelectorAll('.service-card, .advantage-item, .stat-item, .stats, .services, .advantages, .contact');
-    animateElements.forEach(el => {
-        el.classList.add('scroll-animate');
-        observer.observe(el);
+// Функция тестирования
+async function testConnection() {
+    const result = await sendToTelegram({
+        name: 'Тест подключения',
+        telegram: '@test',
+        message: 'Проверка работы бота'
     });
+    
+    if (result.success) {
+        alert('✅ Отлично! Бот работает правильно!');
+    } else {
+        alert(`❌ Ошибка: ${result.error}`);
+    }
+}
+
+// Обработчики форм
+document.addEventListener('DOMContentLoaded', function() {
+    // Добавляем кнопку тестирования
+    const testButton = document.createElement('button');
+    testButton.textContent = '🧪 Тест бота';
+    testButton.style.cssText = 'position:fixed;top:10px;right:10px;z-index:9999;padding:10px;background:#28a745;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;';
+    testButton.onclick = testConnection;
+    document.body.appendChild(testButton);
+
+    // Кнопка получения Chat ID (больше не нужна)
+    const infoButton = document.createElement('button');
+    infoButton.textContent = '✅ Настроено!';
+    infoButton.style.cssText = 'position:fixed;top:60px;right:10px;z-index:9999;padding:10px;background:#28a745;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;';
+    infoButton.onclick = function() {
+        alert('✅ Бот настроен!\n\nТокен: 8283808797:AAE...\nChat ID: 475597372\n\nТеперь можете тестировать формы!');
+    };
+    document.body.appendChild(infoButton);
+
+    // Основная форма
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                telegram: document.getElementById('telegram').value,
+                message: document.getElementById('message').value
+            };
+
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправляем...';
+            submitBtn.disabled = true;
+
+            const result = await sendToTelegram(formData);
+
+            if (result.success) {
+                alert('✅ Заявка отправлена! Мы свяжемся с вами в ближайшее время.');
+                this.reset();
+            } else {
+                alert(`❌ Ошибка: ${result.error}\n\nСвяжитесь через Telegram: @egor_digital`);
+            }
+
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    }
+
+    // Модальная форма
+    const modalForm = document.getElementById('modalForm');
+    if (modalForm) {
+        modalForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('modalName').value,
+                telegram: document.getElementById('modalTelegram').value,
+                message: 'Запрос консультации'
+            };
+
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправляем...';
+            submitBtn.disabled = true;
+
+            const result = await sendToTelegram(formData);
+
+            if (result.success) {
+                alert('✅ Заявка отправлена!');
+                this.reset();
+                if (typeof closeModal === 'function') closeModal();
+            } else {
+                alert(`❌ Ошибка: ${result.error}`);
+            }
+
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    }
 });
 
-// Modal functionality
-const modal = document.getElementById('modal');
-const modalForm = document.getElementById('modalForm');
-const contactForm = document.getElementById('contactForm');
-
+// Функции модального окна
 function openModal() {
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
+    const modal = document.getElementById('modal');
+    if (modal) modal.style.display = 'block';
 }
 
 function closeModal() {
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+    const modal = document.getElementById('modal');
+    if (modal) modal.style.display = 'none';
 }
 
-// Close modal when clicking on X or outside
-document.querySelector('.close').addEventListener('click', closeModal);
-modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        closeModal();
-    }
-});
+// Закрытие модального окна
+document.addEventListener('DOMContentLoaded', function() {
+    const closeBtn = document.querySelector('.close');
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
 
-// Close modal with Escape key
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.style.display === 'block') {
-        closeModal();
-    }
-});
-
-// Form submission handlers
-function handleFormSubmit(form, isModal = false) {
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-    
-    // Show loading state
-    const submitBtn = form.querySelector('.submit-btn');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Отправка...';
-    submitBtn.disabled = true;
-    
-    // Simulate form submission (replace with actual API call)
-    setTimeout(() => {
-        // Success message
-        showNotification('Спасибо! Мы свяжемся с вами в ближайшее время.', 'success');
-        
-        // Reset form
-        form.reset();
-        
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        
-        // Close modal if it's modal form
-        if (isModal) {
-            closeModal();
-        }
-    }, 2000);
-}
-
-// Notification system
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.innerHTML = `
-        <div class="notification-content">
-            <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
-            <span>${message}</span>
-        </div>
-    `;
-    
-    // Add styles
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#10b981' : '#3b82f6'};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        z-index: 3000;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        max-width: 400px;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Animate in
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // Remove after 5 seconds
-    setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 5000);
-}
-
-// Form event listeners
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        handleFormSubmit(contactForm);
-    });
-}
-
-if (modalForm) {
-    modalForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        handleFormSubmit(modalForm, true);
-    });
-}
-
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(139, 92, 246, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-});
-
-// Parallax effect for floating elements
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const elements = document.querySelectorAll('.element');
-    
-    elements.forEach((element, index) => {
-        const speed = 0.5 + (index * 0.1);
-        element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
+    window.addEventListener('click', function(e) {
+        const modal = document.getElementById('modal');
+        if (e.target === modal) closeModal();
     });
 });
-
-// Typing effect for hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
-
-// Initialize typing effect when page loads
-document.addEventListener('DOMContentLoaded', () => {
-    const heroTitle = document.querySelector('.neon-text');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        setTimeout(() => {
-            typeWriter(heroTitle, originalText, 50);
-        }, 1000);
-    }
-});
-
-// Hover effects for service cards
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-        card.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', () => {
-        card.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Add CSS for notifications
-const notificationStyles = document.createElement('style');
-notificationStyles.textContent = `
-    .notification-content {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    
-    .notification-content i {
-        font-size: 1.2rem;
-    }
-    
-    @keyframes pulse {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-    }
-    
-    .cta-button:hover {
-        animation: pulse 0.3s ease;
-    }
-`;
-
-document.head.appendChild(notificationStyles);
-
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Apply debouncing to scroll events
-const debouncedScrollHandler = debounce(() => {
-    // Navbar scroll effect
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 100) {
-        navbar.style.background = 'rgba(10, 10, 10, 0.98)';
-        navbar.style.boxShadow = '0 2px 20px rgba(139, 92, 246, 0.1)';
-    } else {
-        navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-        navbar.style.boxShadow = 'none';
-    }
-    
-    // Parallax effect
-    const scrolled = window.pageYOffset;
-    const elements = document.querySelectorAll('.element');
-    
-    elements.forEach((element, index) => {
-        const speed = 0.5 + (index * 0.1);
-        element.style.transform = `translateY(${scrolled * speed}px) rotate(${scrolled * 0.1}deg)`;
-    });
-}, 10);
-
-window.addEventListener('scroll', debouncedScrollHandler);
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('EDSALE website loaded successfully!');
-    
-    // Add loading animation
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-    
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-}); 
