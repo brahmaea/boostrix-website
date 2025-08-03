@@ -135,3 +135,78 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+// Добавьте этот код в ваш script.js (в самый конец файла)
+
+// Функция анимации счетчиков
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number');
+    
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        const prefix = counter.getAttribute('data-prefix') || '';
+        const suffix = counter.getAttribute('data-suffix') || '';
+        
+        let current = 0;
+        const increment = target / 100; // Скорость анимации
+        
+        const updateCounter = () => {
+            if (current < target) {
+                current += increment;
+                counter.textContent = prefix + Math.floor(current) + suffix;
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = prefix + target + suffix;
+            }
+        };
+        
+        updateCounter();
+    });
+}
+
+// Функция проверки видимости элемента
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
+
+// Запуск анимации при прокрутке
+let animated = false;
+
+function handleScroll() {
+    const statsSection = document.querySelector('.stats');
+    
+    if (statsSection && isElementInViewport(statsSection) && !animated) {
+        animateCounters();
+        animated = true;
+    }
+}
+
+// Инициализация при загрузке страницы
+document.addEventListener('DOMContentLoaded', function() {
+    // Сброс значений счетчиков на 0
+    const counters = document.querySelectorAll('.stat-number');
+    counters.forEach(counter => {
+        counter.textContent = '0';
+    });
+    
+    // Запуск анимации при прокрутке
+    window.addEventListener('scroll', handleScroll);
+    
+    // Проверка при загрузке (если секция уже видна)
+    setTimeout(handleScroll, 500);
+});
+
+// Альтернативный вариант - запуск анимации сразу при загрузке
+// Раскомментируйте следующие строки, если хотите запускать анимацию сразу:
+/*
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(() => {
+        animateCounters();
+    }, 1000);
+});
+*/
