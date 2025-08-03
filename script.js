@@ -382,6 +382,36 @@ window.addEventListener('scroll', debouncedScrollHandler);
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Сайт Boostrix успешно загружен!');
     
+    // Проверка загрузки Font Awesome
+    setTimeout(() => {
+        const testIcon = document.createElement('i');
+        testIcon.className = 'fas fa-arrow-up';
+        testIcon.style.fontSize = '1px';
+        testIcon.style.color = 'transparent';
+        document.body.appendChild(testIcon);
+        
+        const computedStyle = window.getComputedStyle(testIcon, ':before');
+        const content = computedStyle.getPropertyValue('content');
+        
+        if (content && content !== 'none') {
+            console.log('Font Awesome загружен успешно');
+        } else {
+            console.log('Font Awesome не загружен, используем резервную иконку');
+            // Добавляем резервную иконку через CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                .advantage-icon .fas.fa-arrow-up::before {
+                    content: "↑";
+                    font-family: Arial, sans-serif;
+                    font-size: 2rem;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        document.body.removeChild(testIcon);
+    }, 1000);
+    
     // Add loading animation
     document.body.style.opacity = '0';
     document.body.style.transition = 'opacity 0.4s ease';
