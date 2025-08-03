@@ -83,7 +83,7 @@ function animateCounters() {
         const target = parseInt(counter.getAttribute('data-target'));
         const prefix = counter.getAttribute('data-prefix') || '';
         const suffix = counter.getAttribute('data-suffix') || '';
-        const duration = 500; // 0.5 seconds
+        const duration = 200; // 0.2 seconds - быстрее!
         const increment = target / (duration / 16); // 60fps
         let current = 0;
         
@@ -229,15 +229,15 @@ function showNotification(message, type = 'info') {
     // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
-    }, 100);
+    }, 50);
     
-    // Remove after 5 seconds
+    // Remove after 3 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
         setTimeout(() => {
             document.body.removeChild(notification);
-        }, 300);
-    }, 5000);
+        }, 200);
+    }, 3000);
 }
 
 // Form event listeners
@@ -279,7 +279,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Typing effect for hero title
-function typeWriter(element, text, speed = 100) {
+function typeWriter(element, text, speed = 50) {
     let i = 0;
     element.innerHTML = '';
     
@@ -300,8 +300,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (heroTitle) {
         const originalText = heroTitle.textContent;
         setTimeout(() => {
-            typeWriter(heroTitle, originalText, 50);
-        }, 1000);
+            typeWriter(heroTitle, originalText, 30);
+        }, 500);
     }
 });
 
@@ -384,9 +384,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add loading animation
     document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
+    document.body.style.transition = 'opacity 0.3s ease';
     
     setTimeout(() => {
         document.body.style.opacity = '1';
-    }, 100);
+    }, 50);
 });
