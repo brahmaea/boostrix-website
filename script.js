@@ -1,5 +1,5 @@
 // ВАШ ТОКЕН И CHAT ID УЖЕ НАСТРОЕНЫ
-const TELEGRAM_BOT_TOKEN = '8283808797:AAEvmthAgZg8BMCSg30iCLA17cOi4XkWN-k';
+const TELEGRAM_BOT_TOKEN = '8283808797:AAEymrhAgZg8BMCSq30iCLAl7cOi4XkWN-k';
 const TELEGRAM_CHAT_ID = '475597372';
 
 // Функция проверки конфигурации
